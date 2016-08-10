@@ -1,0 +1,147 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>myCloset - Virtual Closet</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+
+    <script src="/javascripts/angularApp.js"></script>
+  </head>
+
+<body ng-app="myCloset" ng-controller="MainCtrl">
+
+  <header>
+  <div class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <a href="/" class="navbar-brand">myCloset</a>
+    </div>  
+
+    <!--    MIGHT NEED TO CHANGE THIS..... -->
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/login">Login</a></li>
+    </ul>
+
+
+  </div>
+  </div>
+</header>
+
+<div>
+  <ui-view></ui-view>
+</div>
+
+
+ <script type="text/ng-template" id="/home.html">
+
+
+
+  <div class="container">
+  <form ng-submit="addClothe()" class="form-inline">
+    <h3>Add a new item</h3>
+
+    <div class="form-group">
+      <input type="text"
+        class="form-control" 
+        placeholder="type" 
+        ng-model="type"></input>
+    </div>
+    <div class="form-group">
+      <input type="text" 
+        class="form-control"
+        placeholder="size" 
+        ng-model="size"></input>
+    </div>
+    <div class="form-group">
+      <input type="text" 
+        class="form-control"
+        placeholder="color" 
+        ng-model="color"></input>
+    </div>
+    <div class="form-group">
+     <input type="text" 
+      class="form-control"
+      placeholder="img url" 
+      ng-model="image"></input>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Item!</button>
+  </form>
+</div>
+
+
+
+  <div class="container">
+    <div class="col-sm-4" ng-repeat="clothe in clothes">
+      <div class="thumbnail">
+        <img ng-src="{{clothe.image}}" alt="">
+        <div class="caption">
+          <p><strong>Type:</strong> {{clothe.type}} </p>
+          <p><strong>Size:</strong>  {{clothe.size}} </p>
+          <p><strong>Color:</strong>  {{clothe.color}} </p>
+        </div>
+
+          <span>
+          <a href="#/closet/{{$index}}">Details</a>
+          </span>
+
+      </div>
+    </div>
+  </div>
+
+
+ </script>
+
+ <script type="text/ng-template" id="/closet.html">
+
+  <!-- closet template -->
+
+  <form ng-submit="addComment()"
+    style="margin-top:30px;">
+    <h3>Add a new comment</h3>
+
+    <div class="form-group">
+      <input type="text"
+      class="form-control"
+      placeholder="Comment"
+      ng-model="body"></input>
+    </div>
+    <button type="submit" class="btn btn-primary">Post</button>
+  </form>
+
+
+
+  <div class="container">
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img ng-src="{{clothe.image}}" alt="">
+        <div class="caption">
+          <p><strong>Type:</strong> {{clothe.type}} </p>
+          <p><strong>Size:</strong>  {{clothe.size}} </p>
+          <p><strong>Color:</strong>  {{clothe.color}} </p>
+        </div>
+
+        <p><strong>Comments:</strong></p>
+          <div ng-repeat="comment in clothe.comments">
+            <span style="font-size: 15px; margin-left: 10px;">
+              {{comment.body}}
+            </span>
+          </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+ </script>
+
+</body>
+</html>
+
+
+
+
